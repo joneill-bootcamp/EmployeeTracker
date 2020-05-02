@@ -1,21 +1,17 @@
-// // Find all the pets ordering by the lowest price to the highest price.
-// orm.selectAndOrder("animal_name", "pets", "price");
-
-// // Find a pet in the pets table by an animal_name of Rachel.
-// orm.selectWhere("pets", "animal_name", "Rachel");
-
-// // Find the buyer with the most pets.
-// orm.findWhoHasMost("buyer_name", "buyer_id", "buyers", "pets");
-
+// Bring in required modules
 var inquirer = require('inquirer');
+
+// Bring in Obejct definitions
 const Department = require("./lib/Department.js");
 const Role = require("./lib/Role.js");
 const Employee = require("./lib/Employee.js");
 
+// Set up main function
 function main() {
     //Clear screen
     //console.log('\033[2J');
 
+    // Get users choice
     inquirer
         .prompt([{
             type: 'list',
@@ -32,6 +28,7 @@ function main() {
                 'Quit'
             ]
         }])
+        // Evaluate answers 
         .then(function (answer) {
             switch (answer.function) {
                 case 'Add Department':
@@ -59,6 +56,7 @@ function main() {
         })
 }
 
+// Functions
 async function addDepartment() {
     const answer = await inquirer.prompt([{
         name: "name",
@@ -84,12 +82,13 @@ async function addRole() {
         },
         {
             name: "salary",
-            type: "input",
+            type: "number",
             message: "Please enter Role salary:",
         },
+        // I tried to get a sub list going here, but simply wasn't able to get it going, will come back and update 
         {
             name: "department_id",
-            type: "input",
+            type: "number",
             message: "Please enter department ID: ",
         },
     ]);
@@ -107,6 +106,9 @@ async function addRole() {
 }
 
 async function addEmployee() {
+
+    var manager = null;
+
     const answer = await inquirer.prompt([{
             name: "firstName",
             type: "input",
@@ -117,17 +119,24 @@ async function addEmployee() {
             type: "input",
             message: "Please provide Last Name:",
         },
+        // I tried to get a sub list going here, but simply wasn't able to get it going, will come back and update 
+
         {
             name: "role_id",
-            type: "input",
+            type: "number",
             message: "Pleae provide Role ID:",
         },
         {
             name: "manager_id",
-            type: "input",
+            type: "number",
             message: "Please provide Manager ID:",
         },
     ]);
+
+    // Deal with A blank Manager ID, workaround for not having sublists working
+    if (!answer.manager_id) {
+        manager_id = null;
+    }
 
     Employee.create([
         "first_name, last_name, role_id, manager_id"
@@ -135,18 +144,21 @@ async function addEmployee() {
         answer.firstName,
         answer.lastName,
         answer.role_id,
-        answer.manager_id
+        manager_id
     ], function (result) {
         console.log('Employee Created');
     });
     main();
 }
 
+// I tried using console.table, but the JSON that comes back here is not compatible wiht it, will revise and update when i've worked it out
+
 function viewDepartment() {
     Department.all(function (data) {
         var hbsObject = {
             Department: data
         };
+        console.log('\033[2J');
         console.log(hbsObject);
 
     });
@@ -158,6 +170,7 @@ function viewRoles() {
         var hbsObject = {
             Role: data
         };
+        console.log('\033[2J');
         console.log(hbsObject);
 
     });
@@ -169,11 +182,12 @@ function viewEmployees() {
         var hbsObject = {
             Employee: data
         };
+        console.log('\033[2J');
         console.log(hbsObject);
 
     });
     main();
 }
 
-
+//Execute main menu
 main();

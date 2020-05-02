@@ -1,4 +1,6 @@
 // Import MySQL connection.
+// Brought this in from Saturday's Lession, makes life a LOT easier!!
+// Hope this is OK, I threw out the other code I had written and decided to re-write using ORM
 var connection = require("../config/connection.js");
 
 // Helper function for SQL syntax.
