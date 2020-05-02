@@ -28,7 +28,8 @@ function main() {
                 'Add Employee',
                 'View Departments',
                 'View Roles',
-                'View Employees'
+                'View Employees',
+                'Quit'
             ]
         }])
         .then(function (answer) {
@@ -51,6 +52,9 @@ function main() {
                 case 'View Employees':
                     viewEmployees();
                     break;
+                case 'Quit':
+                    console.log('Have a nice day!');
+                    process.exit(0); //exit status '0' indicates normal exit
             }
         })
 }
@@ -150,10 +154,24 @@ function viewDepartment() {
 }
 
 function viewRoles() {
+    Role.all(function (data) {
+        var hbsObject = {
+            Role: data
+        };
+        console.log(hbsObject);
+
+    });
     main();
 }
 
 function viewEmployees() {
+    Employee.all(function (data) {
+        var hbsObject = {
+            Employee: data
+        };
+        console.log(hbsObject);
+
+    });
     main();
 }
 
