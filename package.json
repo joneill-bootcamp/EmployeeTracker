@@ -1,0 +1,23 @@
+{
+  "name": "employeetracker",
+  "version": "1.0.0",
+  "description": "Employee Tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joneill-bootcamp/EmployeeTracker.git"
+  },
+  "author": "John ONeill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joneill-bootcamp/EmployeeTracker/issues"
+  },
+  "homepage": "https://github.com/joneill-bootcamp/EmployeeTracker#readme",
+  "dependencies": {
+    "inquirer": "^7.1.0",
+    "mysql": "^2.18.1"
+  }
+}
