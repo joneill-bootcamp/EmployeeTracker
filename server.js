@@ -5,11 +5,23 @@ var inquirer = require('inquirer');
 const Department = require("./lib/Department.js");
 const Role = require("./lib/Role.js");
 const Employee = require("./lib/Employee.js");
+const figlet = require("figlet");
+
+
+async function displayTitle() {
+    figlet("Employee Tracker", function (err, data) {
+        if (err) {
+            console.log("Something went wrong...");
+            console.dir(err);
+            return;
+        }
+        console.log(data);
+    });
+}
 
 // Set up main function
-function main() {
-    //Clear screen
-    //console.log('\033[2J');
+async function main() {
+    displayTitle();
 
     // Get users choice
     inquirer
@@ -102,7 +114,9 @@ async function addRole() {
     ], function (result) {
         console.log('Role Created');
     });
-    main();
+    setTimeout(function () {
+        main();
+    }, 1000);
 }
 
 async function addEmployee() {
@@ -148,7 +162,9 @@ async function addEmployee() {
     ], function (result) {
         console.log('Employee Created');
     });
-    main();
+    setTimeout(function () {
+        main();
+    }, 1000);
 }
 
 // I tried using console.table, but the JSON that comes back here is not compatible wiht it, will revise and update when i've worked it out
@@ -158,7 +174,7 @@ function viewDepartment() {
         var hbsObject = {
             Department: data
         };
-        console.log('\033[2J');
+        //console.log('\033[2J');
         console.log(hbsObject);
 
     });
@@ -170,7 +186,7 @@ function viewRoles() {
         var hbsObject = {
             Role: data
         };
-        console.log('\033[2J');
+        //console.log('\033[2J');
         console.log(hbsObject);
 
     });
@@ -182,9 +198,8 @@ function viewEmployees() {
         var hbsObject = {
             Employee: data
         };
-        console.log('\033[2J');
+        //console.log('\033[2J');
         console.log(hbsObject);
-
     });
     main();
 }

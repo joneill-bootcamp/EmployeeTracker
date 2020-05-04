@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/joneill-bootcamp/EmployeeTracker#readme",
   "dependencies": {
+    "figlet": "^1.4.0",
     "inquirer": "^7.1.0",
     "mysql": "^2.18.1"
   }
